@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교원 진로 적합도 원픽 (MBTI형 2지선다)</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 1. 시작 화면 -->
+        <section id="intro-screen" class="screen active">
+            <div class="intro-badge">🏫 전국 교원 진로 적성 탐구</div>
+            <h1 class="intro-title">교원 진로 적합도<br><span class="highlight-text">원픽(One-Pick)</span></h1>
+            <p class="intro-subtitle">나는 과연 어떤 교직의 길을 걸을 상인가?</p>
+
+            <div class="archetype-chips">
+                <span class="chip chip-principal">👑 교장</span>
+                <span class="chip chip-supervisor">⚡ 장학사</span>
+                <span class="chip chip-master">🧘 수석교사</span>
+                <span class="chip chip-regular">🏖️ 평교사</span>
+                <span class="chip chip-overseas">✈️ 해외파견</span>
+                <span class="chip chip-resignation">🐅 의원면직</span>
+            </div>
+
+            <div class="intro-card">
+                <div class="intro-feature">
+                    <span class="feature-icon">🎯</span>
+                    <div>
+                        <strong>4대 교직 평가 축</strong>
+                        <p>무대(Scope) · 동기(Driver) · 체제적응(Fit) · 위험감수(Risk)</p>
+                    </div>
+                </div>
+                <div class="intro-feature">
+                    <span class="feature-icon">⚡</span>
+                    <div>
+                        <strong>총 20문항 2지선다</strong>
+                        <p>학교 현장의 찐 현실을 담은 문항 (약 3분 소요)</p>
+                    </div>
+                </div>
+            </div>
+
+            <button id="start-btn" class="cta-btn pulse-anim">테스트 시작하기 ▶</button>
+        </section>
+
+        <!-- 2. 퀴즈 화면 -->
+        <section id="quiz-screen" class="screen">
+            <div class="quiz-header">
+                <div class="axis-indicator">
+                    <span id="axis-badge" class="axis-badge">PART 1 · 무대 (Scope)</span>
+                    <span id="progress-text" class="progress-text">1 / 20</span>
+                </div>
+                <div class="progress-bar-wrapper">
+                    <div id="progress-fill" class="progress-bar-fill" style="width: 5%;"></div>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p id="question-text" class="question-text">질문 내용이 표시됩니다.</p>
+            </div>
+
+            <div class="options-group">
+                <button id="option-a-btn" class="option-card" data-choice="A">
+                    <div class="option-label">A</div>
+                    <div class="option-content" id="option-a-text">A 선택지 내용</div>
+                </button>
+                <button id="option-b-btn" class="option-card" data-choice="B">
+                    <div class="option-label">B</div>
+                    <div class="option-content" id="option-b-text">B 선택지 내용</div>
+                </button>
+            </div>
+
+            <div class="nav-control">
+                <button id="prev-btn" class="sub-nav-btn" disabled>◀ 이전</button>
+                <button id="next-btn" class="sub-nav-btn">다음 ▶</button>
+            </div>
+        </section>
+
+        <!-- 3. 결과 화면 -->
+        <section id="result-screen" class="screen">
+            <div class="result-header">
+                <span class="result-label">교직 DNA 분석 완료</span>
+                <div class="code-wrapper">
+                    <span class="code-desc">나의 교직 4대 축 성향 코드</span>
+                    <div id="user-code-badge" class="user-code-badge">S - I - F - R</div>
+                </div>
+            </div>
+
+            <!-- 1순위 최적 진로 메인 카드 -->
+            <div id="best-match-card" class="best-card">
+                <div class="best-badge">🏆 1순위 최적 진로</div>
+                <div class="best-identity">
+                    <div id="best-emoji" class="best-emoji">👑</div>
+                    <div class="best-titles">
+                        <h2 id="best-title" class="best-title">교장</h2>
+                        <span id="best-subtitle" class="best-subtitle">학교의 절대군주형</span>
+                    </div>
+                </div>
+
+                <p id="best-summary" class="summary-text">상세 요약 설명이 표시됩니다.</p>
+
+                <!-- 특화 능력치 스탯 (Stats) -->
+                <div class="stats-section">
+                    <h3 class="section-title">⚡ 특화 능력치 (Special Stats)</h3>
+                    <div id="stats-container" class="stats-grid">
+                        <!-- 동적으로 스탯 카드 생성 -->
+                    </div>
+                </div>
+
+                <!-- 4대 축 분석 차트/게이지 -->
+                <div class="analysis-section">
+                    <h3 class="section-title">📊 나의 4대 축 밸런스 분석</h3>
+                    <div class="axis-bars" id="axis-bars-container">
+                        <!-- 동적으로 게이지 바 생성 -->
+                    </div>
+                </div>
+
+                <!-- 추천 꿀팁 (Tip) -->
+                <div class="action-plan-box">
+                    <span class="action-plan-icon">💡</span>
+                    <div>
+                        <strong>교직 테크트리 꿀팁</strong>
+                        <p id="best-tip">꿀팁 내용</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2순위 추천 진로 (Runner-up) 미니 카드 -->
+            <div id="runner-up-card" class="runner-up-card clickable" role="button" tabindex="0">
+                <div class="runner-up-header">
+                    <div class="runner-up-badge">🥈 2순위 추천 진로 (Runner-up)</div>
+                    <span id="runner-up-toggle-btn" class="toggle-hint">설명 보기 ▼</span>
+                </div>
+                <div class="runner-up-content">
+                    <span id="runner-up-emoji" class="runner-up-emoji">⚡</span>
+                    <div class="runner-up-info">
+                        <strong id="runner-up-title" class="runner-up-title">장학사</strong>
+                        <span id="runner-up-subtitle" class="runner-up-subtitle">교육청 불나방형</span>
+                        <p id="runner-up-reason" class="runner-up-reason">점수 차이가 근소하여 언제든 잠재력을 발휘할 수 있는 진로입니다.</p>
+                    </div>
+                </div>
+                <!-- 클릭 시 열리는 상세 설명 영역 -->
+                <div id="runner-up-detail" class="runner-up-detail" style="display: none;">
+                    <p id="runner-up-summary" class="summary-text runner-up-summary-text"></p>
+                    <div class="stats-section">
+                        <h4 class="section-sub-title">⚡ 2순위 특화 능력치</h4>
+                        <div id="runner-up-stats" class="stats-grid"></div>
+                    </div>
+                    <div class="action-plan-box runner-up-tip-box">
+                        <span class="action-plan-icon">💡</span>
+                        <div>
+                            <strong>2순위 맞춤 테크트리 꿀팁</strong>
+                            <p id="runner-up-tip"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 하단 인터랙션 버튼 -->
+            <div class="result-actions">
+                <button id="share-btn" class="action-btn share-btn">🔗 결과 복사 및 공유하기</button>
+                <button id="restart-btn" class="action-btn restart-btn">🔄 다시 테스트하기</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- 토스트 알림 메시지 -->
+    <div id="toast" class="toast">결과가 클립보드에 복사되었습니다!</div>
+
+    <!-- 스크립트 로드 -->
+    <script src="questions.js"></script>
+    <script src="careers.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
